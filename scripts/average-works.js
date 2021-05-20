@@ -1,4 +1,4 @@
-const Blocchain = require('./Blockchain');
+const Blocchain = require('../blockchain/index');
 
 const blockchain = new Blocchain();
 
