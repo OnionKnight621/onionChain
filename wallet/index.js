@@ -1,5 +1,4 @@
 const cryptoHash = require('../utils/cryptoHash');
-
 const { ec } = require('../utils/Elliptic');
 const { STARTING_BALANCE } = require('../config');
 
