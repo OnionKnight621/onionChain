@@ -35,10 +35,14 @@ app.post('/api/mine', (req, res) => {
 
 app.post('/api/transact', (req, res) => {
     const { amount, recipient } = req.body;
-    let transaction;
+    let transaction = transactionPool.existingTransaction({ inputAddress: wallet.publicKey });
 
     try {
-        transaction = wallet.createTransaction({ recipient, amount });
+        if (transaction) {
+            transaction.update({ senderWallet: wallet, recipient, amount });
+        } else {
+            transaction = wallet.createTransaction({ recipient, amount });
+        }
     } catch (err) {
         return res.status(400).json({ type: "error", message: err.message });
     }
