@@ -58,7 +58,7 @@ app.get('/api/transaction-pool-map', (req, res) => {
     res.status(200).json(transactionPool.transactionMap);
 });
 
-const syncChains = () => {
+const syncWithRootState = () => {
     request({ url: `${ROOT_NODE_ADDRESS}/api/blocks` }, (err, res, body) => {
         if (!err && res.statusCode === 200) {
             const rootChain = JSON.parse(body);
@@ -67,12 +67,21 @@ const syncChains = () => {
             blockchain.replaceChain(rootChain);
         }
     });
+
+    request({ url: `${ROOT_NODE_ADDRESS}/api/transaction-pool-map` }, (err, res, body) => {
+        if (!err && res.statusCode === 200) {
+            const rootTransactionPoolMap = JSON.parse(body);
+
+            console.log('Syncing transactions pool map...', rootTransactionPoolMap);
+            transactionPool.setMap(rootTransactionPoolMap);
+        }
+    });
 }
 
 app.listen(PORT, () => {
     console.log(`Listening on localhost:${PORT}`);
 
     if (PORT !== DEFAULT_PORT) {
-        syncChains();
+        syncWithRootState();
     }
 });
