@@ -16,7 +16,7 @@ const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 app.use(bodyParser.json());
 
 app.get('/api/blocks', (req, res) => {
-    res.json(blockchain.chain);
+    res.status(200).json(blockchain.chain);
 });
 
 app.post('/api/mine', (req, res) => {
