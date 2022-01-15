@@ -6,12 +6,14 @@ const Blockchain = require('./blockchain/index');
 const PubSub = require('./app/PubSub');
 const TransactionPool = require('./wallet/TransactionPool');
 const Wallet = require('./wallet');
+const TransactionMiner = require('./app/TransactionMiner');
 
 const app = express();
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
 const pubsub = new PubSub({ blockchain, transactionPool });
+const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
 const DEFAULT_PORT = 3000;
 const PORT = process.env.GENERATE_PEER_PORT === 'true' ? DEFAULT_PORT + Math.ceil(Math.random() * 1000) : DEFAULT_PORT;
@@ -56,6 +58,12 @@ app.post('/api/transact', (req, res) => {
 
 app.get('/api/transaction-pool-map', (req, res) => {
     res.status(200).json(transactionPool.transactionMap);
+});
+
+app.get('/api/mine-transactions', (req, res) => {
+    transactionMiner.mineTransactions();
+
+    res.redirect('/api/blocks');
 });
 
 const syncWithRootState = () => {
