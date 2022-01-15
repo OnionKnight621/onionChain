@@ -1,10 +1,5 @@
 const redis = require('redis');
-
-const CHANNELS = {
-    TEST: 'TEST',
-    BLOCKCHAIN: 'BLOCKCHAIN',
-    TRANSACTION: 'TRANSACTION'
-}
+const { CHANNELS } = require('../constants');
 
 class PubSub {
     constructor({ blockchain, transactionPool }) {

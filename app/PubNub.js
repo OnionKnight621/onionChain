@@ -1,13 +1,13 @@
 const PubNub = require('pubnub');
+
+const { CHANNELS } = require('../constants');
+
 const credentials = {
     publishKey: "pub-c-2b2890c6-6f43-4e35-bb42-f8c978f2cb0a",
     subscribeKey: "sub-c-64a732a4-b7cd-11eb-b2e5-0e040bede276",
     secretkey: "sec-c-NzExNDY1YWUtMmYwMy00ZTkxLTk2ZWItMjNiOWU4YWM1NThi"
 }
 
-const CHANNELS = {
-    TEST: 'TEST'
-}
 
 class PubSub {
     constructor() {
