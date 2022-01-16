@@ -1,5 +1,8 @@
 const Block = require('./Block');
 const cryptoHash = require('../utils/cryptoHash');
+const { REWARD_INPUT, MINING_REWARD } = require('../config');
+const Transaction = require('../wallet/Transaction');
+const Wallet = require('../wallet');
 
 class Blockchain {
     constructor() {
@@ -32,6 +35,54 @@ class Blockchain {
 
         console.log('Replacing chain with', chain);
         this.chain = chain;
+    }
+
+    validTransactionData({ chain }) {
+        for(let i = 1; i < chain.length; i++) {
+            const block = chain[i];
+            const transactionSet = new Set();
+            let rewardTransactionCount = 0;
+
+            for (let transaction of block.data) {
+                if (transaction.input.address === REWARD_INPUT.address) {
+                    rewardTransactionCount++;
+
+                    if (rewardTransactionCount > 1) {
+                        console.error('Miner rewards exceedd limit');
+                        return false;
+                    }
+
+                    if (Object.values(transaction.outputMap)[0] !== MINING_REWARD) {
+                        console.error('Miner reward amount is invalid');
+                        return false;
+                    }
+                } else {
+                    if (!Transaction.validateTransaction(transaction)) {
+                        console.error('Invalid transaction');
+                        return false;
+                    }
+
+                    const trueBalance = Wallet.calculateBalance({
+                        chain: this.chain,
+                        address: transaction.input.address
+                    });
+
+                    if (transaction.input.amount !== trueBalance) {
+                        console.error('Invalid input amount');
+                        return false;
+                    }
+
+                    if (transactionSet.has(transaction)) {
+                        console.error('An identical transaction appeared');
+                        return false;
+                    } else {
+                        transactionSet.add(transaction);
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     static isValidChain(chain) {
