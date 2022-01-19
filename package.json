@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
-    "start:dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon src/index.js",
+    "build": "./node_modules/typescript/bin/tsc",
     "start-redis": "redis-server --daemonize yes"
   },
   "jest": {
@@ -24,11 +25,20 @@
     "pubnub": "^4.32.0",
     "redis": "^3.1.2",
     "request": "^2.88.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "webpack": "^5.66.0"
   },
   "devDependencies": {
+    "@jest/types": "^27.4.2",
+    "@types/elliptic": "^6.4.14",
+    "@types/jest": "^27.4.0",
+    "@types/redis": "^4.0.11",
+    "@types/uuid": "^8.3.4",
     "cross-env": "^7.0.3",
     "jest": "^26.6.3",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "source-map-loader": "^3.0.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4"
   }
 }

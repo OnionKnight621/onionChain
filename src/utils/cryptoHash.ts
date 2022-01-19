@@ -1,6 +1,6 @@
-const crypto = require('crypto');
+import crypto from "crypto";
 
-const cryptoHash = (...inputs) => {
+const cryptoHash = (...inputs: any[]) => {
     const hash = crypto.createHash('sha256');
 
     hash.update(inputs.map(input => JSON.stringify(input)).sort().join('_'));
@@ -8,4 +8,4 @@ const cryptoHash = (...inputs) => {
     return hash.digest('hex');
 };
 
-module.exports = cryptoHash;
+export default cryptoHash;
