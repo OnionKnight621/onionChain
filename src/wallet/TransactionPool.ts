@@ -1,8 +1,8 @@
+import Block from "../blockchain/Block";
 import Transaction from "./Transaction";
-import { transactionMap } from "./types";
 
 export default class TransactionPool {
-  transactionMap: transactionMap;
+  transactionMap: any;
 
   constructor() {
     this.transactionMap = {};
@@ -12,7 +12,8 @@ export default class TransactionPool {
     this.transactionMap[transaction.id] = transaction;
   }
 
-  setMap(transactionMap: transactionMap) {
+  setMap(transactionMap: any) {
+    console.log(transactionMap, "teetetet");
     this.transactionMap = transactionMap;
   }
 
@@ -34,7 +35,7 @@ export default class TransactionPool {
     this.transactionMap = {};
   }
 
-  clearBlockchainTransactions(chain: any) {
+  clearBlockchainTransactions(chain: Block[]) {
     for (let i = 1; i < chain.length; i++) {
       const block = chain[i];
 

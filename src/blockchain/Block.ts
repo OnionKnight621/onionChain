@@ -22,6 +22,7 @@ export default class Block {
   difficulty: number;
 
   constructor({ lastHash, hash, data, timestamp, nonce, difficulty }: IBlock) {
+    console.log(lastHash, hash, data, timestamp, nonce, difficulty)
     this.lastHash = lastHash;
     this.hash = hash;
     this.data = data;

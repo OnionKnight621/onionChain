@@ -1,8 +1,10 @@
 // @ts-ignore
 import redis from "redis";
+import Blockchain from "../blockchain";
 
 import { CHANNELS } from "../constants";
 import Transaction from "../wallet/Transaction";
+import TransactionPool from "../wallet/TransactionPool";
 
 export type publish = {
   channel: string;
@@ -10,8 +12,8 @@ export type publish = {
 };
 
 export default interface IPubSub {
-  blockchain: any;
-  transactionPool: any;
+  blockchain: Blockchain;
+  transactionPool: TransactionPool;
 }
 
 export default class PubSub implements IPubSub {

@@ -1,11 +1,11 @@
-const Block = require("./Block");
-const cryptoHash = require("../utils/cryptoHash");
-const { REWARD_INPUT, MINING_REWARD } = require("../config");
-const Transaction = require("../wallet/Transaction");
-const Wallet = require("../wallet");
+import Block from "./Block";
+import cryptoHash from "../utils/cryptoHash";
+import { REWARD_INPUT, MINING_REWARD } from "../config";
+import Transaction from "../wallet/Transaction";
+import Wallet from "../wallet";
 
 export default class Blockchain {
-  chain: any;
+  chain: Block[];
 
   constructor() {
     this.chain = [Block.genesis()];
@@ -20,7 +20,7 @@ export default class Blockchain {
   }
 
   replaceChain(
-    chain: any,
+    chain: Block[],
     validateTransactions: boolean = false,
     onSuccess: any = false
   ) {
@@ -45,7 +45,7 @@ export default class Blockchain {
     this.chain = chain;
   }
 
-  validTransactionData(chain: any) {
+  validTransactionData(chain: Block[]) {
     for (let i = 1; i < chain.length; i++) {
       const block = chain[i];
       const transactionSet = new Set();
@@ -93,7 +93,7 @@ export default class Blockchain {
     return true;
   }
 
-  static isValidChain(chain: any) {
+  static isValidChain(chain: Block[]) {
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
       return false;
 

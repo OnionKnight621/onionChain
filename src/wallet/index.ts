@@ -3,6 +3,7 @@ import cryptoHash from "../utils/cryptoHash";
 import { ec } from "../utils/Elliptic";
 import { STARTING_BALANCE } from "../config";
 import { createTransactionInput } from "./types";
+import Block from "../blockchain/Block";
 
 export default class Wallet {
   balance: number;
@@ -37,7 +38,7 @@ export default class Wallet {
     });
   }
 
-  static calculateBalance(chain: any, address: string) {
+  static calculateBalance(chain: Block[], address: string): number {
     let hasConductedTransaction = false;
     let outputsTotal = 0;
 

@@ -2,20 +2,20 @@ import { v1 as uuid } from "uuid";
 import Wallet from ".";
 import { REWARD_INPUT, MINING_REWARD } from "../config";
 import { verifySignature } from "../utils/Elliptic";
-import { outputMap } from "./types";
+import { input, outputMap } from "./types";
 
 export interface ITransaction {
-  senderWallet?: any;
+  senderWallet?: Wallet;
   recipient?: string;
   amount?: number;
   outputMap?: outputMap;
-  input?: any;
+  input?: input;
 }
 
 export default class Transaction {
-  id: any;
+  id: string;
   outputMap: outputMap;
-  input: any;
+  input: input;
 
   constructor({
     senderWallet,
@@ -27,6 +27,7 @@ export default class Transaction {
     this.id = uuid();
     this.outputMap =
       outputMap || this.createOutputMap({ senderWallet, recipient, amount });
+    // @ts-ignoretsc
     this.input = input || this.createInput(senderWallet, this.outputMap);
   }
 
@@ -35,6 +36,8 @@ export default class Transaction {
 
     outputMap[recipient] = amount;
     outputMap[senderWallet.publicKey] = senderWallet.balance - amount;
+
+    console.log(outputMap);
 
     return outputMap;
   }

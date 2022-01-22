@@ -1,17 +1,21 @@
+import Blockchain from "../blockchain";
+import Wallet from "../wallet";
 import Transaction from "../wallet/Transaction";
+import TransactionPool from "../wallet/TransactionPool";
+import PubSub from "./PubSub";
 
 export interface ITransactionMiner {
-  blockchain: any;
-  transactionPool: any;
-  wallet: any;
-  pubsub: any;
+  blockchain: Blockchain;
+  transactionPool: TransactionPool;
+  wallet: Wallet;
+  pubsub: PubSub;
 }
 
 export default class TransactionMiner implements ITransactionMiner {
-  blockchain: any;
-  transactionPool: any;
-  wallet: any;
-  pubsub: any;
+  blockchain: Blockchain;
+  transactionPool: TransactionPool;
+  wallet: Wallet;
+  pubsub: PubSub;
 
   constructor({
     blockchain,

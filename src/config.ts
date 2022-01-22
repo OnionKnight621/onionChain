@@ -13,15 +13,10 @@ export const GENESIS_DATA = {
 export const STARTING_BALANCE = 1000;
 
 export const REWARD_INPUT = {
-    address: '*authorized-reward*'
+    address: '*authorized-reward*',
+    timestamp: 1642883079466,
+    amount: 1,
+    signature: "sign"
 };
 
 export const MINING_REWARD = 50;
-
-// module.exports = {
-//     GENESIS_DATA,
-//     MINE_RATE,
-//     STARTING_BALANCE,
-//     REWARD_INPUT,
-//     MINING_REWARD,
-// };

@@ -5,7 +5,7 @@ import Wallet from "../wallet";
 import Transaction from "../wallet/Transaction";
 
 describe("Blockchain", () => {
-  let blockchain: Blockchain, newChain: any, originalChain: any, errorMock: any;
+  let blockchain: Blockchain, newChain: Blockchain, originalChain: Block[], errorMock: any;
 
   beforeEach(() => {
     blockchain = new Blockchain();
@@ -34,6 +34,7 @@ describe("Blockchain", () => {
   describe("isValidChain()", () => {
     describe("when the chain does not start with the genesis block", () => {
       it("should return false", () => {
+        // @ts-ignore
         blockchain.chain[0] = { data: "fake-genesis" };
 
         expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
@@ -106,7 +107,8 @@ describe("Blockchain", () => {
 
     describe("when the new chain is not longer", () => {
       beforeEach(() => {
-        newChain.chain[0] = { new: "chain" };
+        // @ts-ignore
+        newChain.chain[0] = { data: "chain" };
         blockchain.replaceChain(newChain.chain);
       });
 

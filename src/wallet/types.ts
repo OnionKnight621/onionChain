@@ -1,9 +1,17 @@
+import { SignatureInput } from "elliptic";
+import Block from "../blockchain/Block";
+
 export type createTransactionInput = {
   recipient: string;
   amount: number;
-  chain?: any;
+  chain?: Block[];
 };
 
-export type transactionMap = any;
+export type input = {
+  timestamp: number;
+  amount: number;
+  address: string;
+  signature: SignatureInput;
+};
 
 export type outputMap = any;
