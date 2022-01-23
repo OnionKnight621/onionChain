@@ -1,24 +1,26 @@
 // @ts-ignore
-import redis from "redis";
-import Blockchain from "../blockchain";
+import redis from 'redis';
+import Blockchain from '../blockchain';
 
-import { CHANNELS } from "../constants";
-import Transaction from "../wallet/Transaction";
-import TransactionPool from "../wallet/TransactionPool";
+import { CHANNELS } from '../constants';
+import Transaction from '../wallet/Transaction';
+import TransactionPool from '../wallet/TransactionPool';
 
 export type publish = {
   channel: string;
   message: string;
 };
 
-export default interface IPubSub {
+export interface IPubSub {
   blockchain: Blockchain;
   transactionPool: TransactionPool;
 }
 
-export default class PubSub implements IPubSub {
+export default class PubSub {
   publisher: any;
   subscriber: any;
+  blockchain: Blockchain;
+  transactionPool: TransactionPool;
 
   constructor({ blockchain, transactionPool }: IPubSub) {
     this.blockchain = blockchain;
@@ -28,8 +30,8 @@ export default class PubSub implements IPubSub {
     this.subscriber = redis.createClient();
 
     this.subscribeToChannels();
-    this.subscriber.on("message", (channel: string, message: string) =>
-      this.handleMessage(channel, message)
+    this.subscriber.on('message', (channel: string, message: string) =>
+      this.handleMessage(channel, message),
     );
   }
 

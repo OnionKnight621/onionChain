@@ -1,4 +1,5 @@
 import { SignatureInput } from "elliptic";
+import Wallet from ".";
 import Block from "../blockchain/Block";
 
 export type createTransactionInput = {
@@ -12,6 +13,12 @@ export type input = {
   amount: number;
   address: string;
   signature: SignatureInput;
+};
+
+export type createOutputMap = {
+  senderWallet: Wallet;
+  recipient: string;
+  amount: number;
 };
 
 export type outputMap = any;

@@ -2,7 +2,7 @@ import { v1 as uuid } from "uuid";
 import Wallet from ".";
 import { REWARD_INPUT, MINING_REWARD } from "../config";
 import { verifySignature } from "../utils/Elliptic";
-import { input, outputMap } from "./types";
+import { createOutputMap, input, outputMap } from "./types";
 
 export interface ITransaction {
   senderWallet?: Wallet;
@@ -27,11 +27,10 @@ export default class Transaction {
     this.id = uuid();
     this.outputMap =
       outputMap || this.createOutputMap({ senderWallet, recipient, amount });
-    // @ts-ignoretsc
     this.input = input || this.createInput(senderWallet, this.outputMap);
   }
 
-  createOutputMap({ senderWallet, recipient, amount }: outputMap) {
+  createOutputMap({ senderWallet, recipient, amount }: createOutputMap) {
     const outputMap: outputMap = {};
 
     outputMap[recipient] = amount;
@@ -63,7 +62,6 @@ export default class Transaction {
     }
 
     this.outputMap[senderWallet.publicKey] -= amount;
-
     this.input = this.createInput(senderWallet, this.outputMap);
   }
 
