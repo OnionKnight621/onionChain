@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 
-import { ApiService } from './app.service';
+import { ApiService } from './api.service';
 
 @Controller('/api')
 export class ApiController {

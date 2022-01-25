@@ -7,8 +7,8 @@ import {
   transactionMiner,
   transactionPool,
   wallet,
-} from './coin';
-import Wallet from './coin/wallet';
+} from '../coin';
+import Wallet from '../coin/wallet';
 
 export type mineBlock = {
   data: any;
