@@ -1,8 +1,9 @@
 import Block from "../blockchain/Block";
 import Transaction from "./Transaction";
+import { transactionMap } from "./types";
 
 export default class TransactionPool {
-  transactionMap: any;
+  transactionMap: transactionMap;
 
   constructor() {
     this.transactionMap = {};
@@ -12,7 +13,7 @@ export default class TransactionPool {
     this.transactionMap[transaction.id] = transaction;
   }
 
-  setMap(transactionMap: any) {
+  setMap(transactionMap: transactionMap) {
     this.transactionMap = transactionMap;
   }
 

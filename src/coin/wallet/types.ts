@@ -21,4 +21,6 @@ export type createOutputMap = {
   amount: number;
 };
 
+// TODO: describe types with dynamic structure
 export type outputMap = any;
+export type transactionMap = any;
