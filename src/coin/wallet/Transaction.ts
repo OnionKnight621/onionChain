@@ -1,6 +1,6 @@
 import { v1 as uuid } from "uuid";
 import Wallet from ".";
-import { REWARD_INPUT, MINING_REWARD } from "../config";
+import { REWARD_INPUT, MINING_REWARD } from "../../config";
 import { verifySignature } from "../utils/Elliptic";
 import { createOutputMap, input, outputMap } from "./types";
 
@@ -35,8 +35,6 @@ export default class Transaction {
 
     outputMap[recipient] = amount;
     outputMap[senderWallet.publicKey] = senderWallet.balance - amount;
-
-    console.log(outputMap);
 
     return outputMap;
   }

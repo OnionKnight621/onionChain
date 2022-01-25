@@ -2,7 +2,7 @@ import Wallet from ".";
 import { verifySignature } from "../utils/Elliptic";
 import Transaction from "./Transaction";
 import Blockchain from "../blockchain";
-import { STARTING_BALANCE } from "../config";
+import { STARTING_BALANCE } from "../../config";
 
 describe("Wallet", () => {
   let wallet: Wallet;

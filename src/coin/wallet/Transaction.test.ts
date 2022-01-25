@@ -1,7 +1,7 @@
 import Transaction from "./Transaction";
 import Wallet from ".";
 import { verifySignature } from "../utils/Elliptic";
-import { REWARD_INPUT, MINING_REWARD } from "../config";
+import { REWARD_INPUT, MINING_REWARD } from "../../config";
 
 describe("Transaction", () => {
   let transaction: Transaction,

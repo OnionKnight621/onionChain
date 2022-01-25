@@ -13,7 +13,6 @@ export default class TransactionPool {
   }
 
   setMap(transactionMap: any) {
-    console.log(transactionMap, "teetetet");
     this.transactionMap = transactionMap;
   }
 

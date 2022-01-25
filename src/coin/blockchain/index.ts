@@ -1,6 +1,6 @@
 import Block from "./Block";
 import cryptoHash from "../utils/cryptoHash";
-import { REWARD_INPUT, MINING_REWARD } from "../config";
+import { REWARD_INPUT, MINING_REWARD } from "../../config";
 import Transaction from "../wallet/Transaction";
 import Wallet from "../wallet";
 

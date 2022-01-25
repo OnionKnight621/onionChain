@@ -1,8 +1,7 @@
-// @ts-ignore
-import redis from 'redis';
+import { createClient } from 'redis';
 import Blockchain from '../blockchain';
 
-import { CHANNELS } from '../constants';
+import { CHANNELS } from '../../constants';
 import Transaction from '../wallet/Transaction';
 import TransactionPool from '../wallet/TransactionPool';
 
@@ -26,8 +25,8 @@ export default class PubSub {
     this.blockchain = blockchain;
     this.transactionPool = transactionPool;
 
-    this.publisher = redis.createClient();
-    this.subscriber = redis.createClient();
+    this.publisher = createClient();
+    this.subscriber = createClient();
 
     this.subscribeToChannels();
     this.subscriber.on('message', (channel: string, message: string) =>

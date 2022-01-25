@@ -1,7 +1,7 @@
 import Transaction from "./Transaction";
 import cryptoHash from "../utils/cryptoHash";
 import { ec } from "../utils/Elliptic";
-import { STARTING_BALANCE } from "../config";
+import { STARTING_BALANCE } from "../../config";
 import { createTransactionInput } from "./types";
 import Block from "../blockchain/Block";
 

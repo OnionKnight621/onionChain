@@ -3,7 +3,7 @@ import hexToBin from "hex-to-binary";
 
 import Block from "./Block";
 import cryptoHash from "../utils/cryptoHash";
-import { GENESIS_DATA, MINE_RATE } from "../config";
+import { GENESIS_DATA, MINE_RATE } from "../../config";
 
 describe("Block", () => {
   const timestamp = 2000;

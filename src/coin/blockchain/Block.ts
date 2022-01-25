@@ -1,8 +1,8 @@
 // @ts-ignore
-import hexToBin from "hex-to-binary";
+import hexToBin from 'hex-to-binary';
 
-import { GENESIS_DATA, MINE_RATE } from "../config";
-import cryptoHash from "../utils/cryptoHash";
+import { GENESIS_DATA, MINE_RATE } from '../../config';
+import cryptoHash from '../utils/cryptoHash';
 
 export interface IBlock {
   lastHash: string;
@@ -22,7 +22,6 @@ export default class Block {
   difficulty: number;
 
   constructor({ lastHash, hash, data, timestamp, nonce, difficulty }: IBlock) {
-    console.log(lastHash, hash, data, timestamp, nonce, difficulty)
     this.lastHash = lastHash;
     this.hash = hash;
     this.data = data;
@@ -47,7 +46,7 @@ export default class Block {
       difficulty = this.adjustDifficulty(lastBlock, timestamp);
       hash = cryptoHash(timestamp, lastHash, data, nonce, difficulty);
     } while (
-      hexToBin(hash).substring(0, difficulty) !== "0".repeat(difficulty)
+      hexToBin(hash).substring(0, difficulty) !== '0'.repeat(difficulty)
     );
 
     return new this({

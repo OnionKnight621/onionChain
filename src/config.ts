@@ -20,3 +20,11 @@ export const REWARD_INPUT = {
 };
 
 export const MINING_REWARD = 50;
+
+export const HOST = process.env.HOST || 'http://localhost';
+export const DEFAULT_PORT = Number(process.env.PORT) || 3000;
+export const PORT =
+  process.env.GENERATE_PEER_PORT === 'true'
+    ? DEFAULT_PORT + Math.ceil(Math.random() * 1000)
+    : DEFAULT_PORT;
+export const ROOT_NODE_ADDRESS = `${HOST}:${DEFAULT_PORT}`;
