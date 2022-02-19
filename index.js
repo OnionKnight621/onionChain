@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const request = require('request');
 
 const Blockchain = require('./blockchain/index');
@@ -15,11 +16,12 @@ const wallet = new Wallet();
 const pubsub = new PubSub({ blockchain, transactionPool });
 const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 3001;
 const PORT = process.env.GENERATE_PEER_PORT === 'true' ? DEFAULT_PORT + Math.ceil(Math.random() * 1000) : DEFAULT_PORT;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get('/api/blocks', (req, res) => {
     res.status(200).json(blockchain.chain);
