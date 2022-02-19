@@ -22,7 +22,7 @@ export const REWARD_INPUT = {
 export const MINING_REWARD = 50;
 
 export const HOST = process.env.HOST || 'http://localhost';
-export const DEFAULT_PORT = Number(process.env.PORT) || 3000;
+export const DEFAULT_PORT = Number(process.env.PORT) || 3001;
 export const PORT =
   process.env.GENERATE_PEER_PORT === 'true'
     ? DEFAULT_PORT + Math.ceil(Math.random() * 1000)

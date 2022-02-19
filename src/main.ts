@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import request from 'request';
@@ -32,8 +33,10 @@ const syncWithRootState = () => {
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger: ['error', 'warn', 'log', 'debug'],
+    cors: true
   });
   await app.listen(PORT, () => {
+    Logger.log(`Running on: ${PORT}`);
     if (PORT !== DEFAULT_PORT) {
       syncWithRootState();
     }
