@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
-    "start:dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
+    "start": "node src/index.js",
+    "start:dev": "nodemon src/index.js",
+    "start:dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon src/index.js",
     "start-redis": "redis-server --daemonize yes"
   },
   "jest": {

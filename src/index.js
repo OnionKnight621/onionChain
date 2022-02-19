@@ -108,24 +108,24 @@ const genWalletTransavtion = ({ wallet, recipient, amount }) => {
     transactionPool.setTransaction(transaction);
 }
 
-const walletaction = () => genWalletTransavtion({ wallet, recipient: wallet1.publicKey, amount: 5 })
-const walletaction1 = () => genWalletTransavtion({ wallet: wallet1, recipient: wallet2.publicKey, amount: 15 })
-const walletaction2 = () => genWalletTransavtion({ wallet: wallet2, recipient: wallet.publicKey, amount: 25 })
+// const walletaction = () => genWalletTransavtion({ wallet, recipient: wallet1.publicKey, amount: 5 })
+// const walletaction1 = () => genWalletTransavtion({ wallet: wallet1, recipient: wallet2.publicKey, amount: 15 })
+// const walletaction2 = () => genWalletTransavtion({ wallet: wallet2, recipient: wallet.publicKey, amount: 25 })
 
-for (let i = 0; i < 10; i++) {
-    if (i%3 === 0) {
-        walletaction()
-        walletaction1()
-    } else if (i%3 === 1) {
-        walletaction()
-        walletaction2()
-    } else {
-        walletaction1()
-        walletaction2()
-    }
+// for (let i = 0; i < 10; i++) {
+//     if (i%3 === 0) {
+//         walletaction()
+//         walletaction1()
+//     } else if (i%3 === 1) {
+//         walletaction()
+//         walletaction2()
+//     } else {
+//         walletaction1()
+//         walletaction2()
+//     }
 
-    transactionMiner.mineTransactions()
-}
+//     transactionMiner.mineTransactions()
+// }
 
 app.listen(PORT, () => {
     console.log(`Listening on localhost:${PORT}`);
