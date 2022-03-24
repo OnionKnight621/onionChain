@@ -77,6 +77,40 @@ app.get('/api/wallet-info', (req, res) => {
     });
 });
 
+app.get('/api/generate-some-data', (req, res) => {
+    const wallet1 = new Wallet();
+    const wallet2 = new Wallet();
+
+    const genWalletTransavtion = ({ wallet, recipient, amount }) => {
+        const transaction = wallet.createTransaction({
+            recipient, amount, chain: blockchain.chain
+        })
+
+        transactionPool.setTransaction(transaction);
+    }
+
+    const walletaction = () => genWalletTransavtion({ wallet, recipient: wallet1.publicKey, amount: 5 })
+    const walletaction1 = () => genWalletTransavtion({ wallet: wallet1, recipient: wallet2.publicKey, amount: 15 })
+    const walletaction2 = () => genWalletTransavtion({ wallet: wallet2, recipient: wallet.publicKey, amount: 25 })
+
+    for (let i = 0; i < 10; i++) {
+        if (i%3 === 0) {
+            walletaction()
+            walletaction1()
+        } else if (i%3 === 1) {
+            walletaction()
+            walletaction2()
+        } else {
+            walletaction1()
+            walletaction2()
+        }
+
+        transactionMiner.mineTransactions()
+    }
+
+    res.status(200).json({ message: "Some data generated"});
+})
+
 const syncWithRootState = () => {
     request({ url: `${ROOT_NODE_ADDRESS}/api/blocks` }, (err, res, body) => {
         if (!err && res.statusCode === 200) {
@@ -96,36 +130,6 @@ const syncWithRootState = () => {
         }
     });
 }
-
-const wallet1 = new Wallet();
-const wallet2 = new Wallet();
-
-const genWalletTransavtion = ({ wallet, recipient, amount }) => {
-    const transaction = wallet.createTransaction({
-        recipient, amount, chain: blockchain.chain
-    })
-
-    transactionPool.setTransaction(transaction);
-}
-
-// const walletaction = () => genWalletTransavtion({ wallet, recipient: wallet1.publicKey, amount: 5 })
-// const walletaction1 = () => genWalletTransavtion({ wallet: wallet1, recipient: wallet2.publicKey, amount: 15 })
-// const walletaction2 = () => genWalletTransavtion({ wallet: wallet2, recipient: wallet.publicKey, amount: 25 })
-
-// for (let i = 0; i < 10; i++) {
-//     if (i%3 === 0) {
-//         walletaction()
-//         walletaction1()
-//     } else if (i%3 === 1) {
-//         walletaction()
-//         walletaction2()
-//     } else {
-//         walletaction1()
-//         walletaction2()
-//     }
-
-//     transactionMiner.mineTransactions()
-// }
 
 app.listen(PORT, () => {
     console.log(`Listening on localhost:${PORT}`);
