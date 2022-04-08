@@ -82,4 +82,51 @@ export class ApiService {
       balance: Wallet.calculateBalance(blockchain.chain, address),
     };
   }
+
+  generateSomeData() {
+    const wallet1 = new Wallet();
+    const wallet2 = new Wallet();
+
+    const genWalletTransaction = ({ wallet, recipient, amount }) => {
+      const transaction = wallet.createTransaction({
+        recipient,
+        amount,
+        chain: blockchain.chain,
+      });
+
+      transactionPool.setTransaction(transaction);
+    };
+
+    const walletAction = () =>
+      genWalletTransaction({ wallet, recipient: wallet1.publicKey, amount: 5 });
+    const walletAction1 = () =>
+      genWalletTransaction({
+        wallet: wallet1,
+        recipient: wallet2.publicKey,
+        amount: 15,
+      });
+    const walletAction2 = () =>
+      genWalletTransaction({
+        wallet: wallet2,
+        recipient: wallet.publicKey,
+        amount: 25,
+      });
+
+    for (let i = 0; i < 10; i++) {
+      if (i % 3 === 0) {
+        walletAction();
+        walletAction1();
+      } else if (i % 3 === 1) {
+        walletAction();
+        walletAction2();
+      } else {
+        walletAction1();
+        walletAction2();
+      }
+
+      transactionMiner.mineTransactions();
+    }
+
+    return { message: 'Some data generated' };
+  }
 }

@@ -54,4 +54,9 @@ export class ApiController {
   walletInfo(@Res() res: Response) {
     return res.status(HttpStatus.OK).json(this.appService.walletInfo());
   }
+
+  @Get('/generate-some-data')
+  generateSomeData(@Res() res: Response) {
+    return res.status(HttpStatus.OK).json(this.appService.generateSomeData());
+  }
 }
